@@ -261,3 +261,101 @@ class CheckableSolverTestSpec extends AnyFlatSpec {
     println(proof.get.toString())
   }
 }
+
+/** These are tests for Relations.scala. */
+class IsFunctionSpec extends AnyFlatSpec {
+  def and(args: Expr*) : Expr = And(args)
+  def or(args: Expr*) : Expr = Or(args)
+  def xor(a : Expr, b : Expr) = or(and(a, Not(b)), and(Not(a), b))
+
+  "(and a b)" should "be a function" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    assert(Relations.isFunction(and(a, b), List(a), List(b)))
+  }
+
+  "(or a b)" should "not be a function" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    assert(!Relations.isFunction(or(a, b), List(a), List(b)))
+  }
+
+  "(or (and a b) (and (not a) (not b)))" should "be a function" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    val f = or(and(a, b), and(Not(a), Not(b)))
+    assert(Relations.isFunction(f, List(a), List(b)))
+  }
+
+  "this also" should "be a function" in {
+    val as = (0 to 7).map(i => Variable("a" + i.toString()))
+    val bs = (0 to 7).map(i => Variable("b" + i.toString()))
+    var xs = (as zip bs).map{ case (a, b) => xor(a, b) }
+    val f = And(xs)
+    assert(Relations.isFunction(f, as, bs))
+  }
+
+  "this" should "not be a function" in {
+    val as = (0 to 7).map(i => Variable("a" + i.toString()))
+    val bs = (0 to 7).map(i => Variable("b" + i.toString()))
+    var xs = (as zip bs).map{ case (a, b) => xor(a, b) }
+    val f = Or(xs)
+    assert(!Relations.isFunction(f, as, bs))
+  }
+}
+
+/** These are tests for Relations.scala. */
+class IsTransitiveSpec extends AnyFlatSpec {
+  def and(args: Expr*) : Expr = And(args)
+  def or(args: Expr*) : Expr = Or(args)
+  def xor(a : Expr, b : Expr) = or(and(a, Not(b)), and(Not(a), b))
+
+  "(and a b)" should "be transitive" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    assert(Relations.isTransitive(and(a, b), List(a), List(b)))
+  }
+
+  "(or a b)" should "not be transitive" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    assert(!Relations.isTransitive(or(a, b), List(a), List(b)))
+  }
+
+  "(or (and a b) (and (not a) (not b)))" should "be transitive" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    val f = or(and(a, b), and(Not(a), Not(b)))
+    assert(Relations.isTransitive(f, List(a), List(b)))
+  }
+
+  "(and (or a b) (or (not a) (not b)))" should "not be transitive" in {
+    val a = Variable("a")
+    val b = Variable("b")
+
+    val f = or(and(a, b), and(Not(a), Not(b)))
+    assert(!Relations.isTransitive(f, List(a), List(b)))
+  }
+
+  "this also" should "be transitive" in {
+    val as = (0 to 7).map(i => Variable("a" + i.toString()))
+    val bs = (0 to 7).map(i => Variable("b" + i.toString()))
+    var xs = (as zip bs).map{ case (a, b) => Not(xor(a, b)) }
+    val f = And(xs)
+    assert(Relations.isTransitive(f, as, bs))
+  }
+
+  "this" should "not be transitive" in {
+    val as = (0 to 7).map(i => Variable("a" + i.toString()))
+    val bs = (0 to 7).map(i => Variable("b" + i.toString()))
+    var xs = (as zip bs).map{ case (a, b) => xor(a, b) }
+    val f = And(xs)
+    assert(!Relations.isTransitive(f, as, bs))
+  }
+}

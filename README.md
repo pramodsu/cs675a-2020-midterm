@@ -49,4 +49,5 @@ The tests for each problem are in the class:
 
 * Problem 1(a): DPSolverSpec.
 * Problem 1(b) and 1(c): CheckableSolverTestSpec
-* Problem 2: SubstituteSpec, IsFunctionSpec and 
+* Problem 2: SubstituteSpec, IsFunctionSpec and IsTransitiveSpec.
+* Problem 3 has **no** tests.
