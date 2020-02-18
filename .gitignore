@@ -1,0 +1,9 @@
+.metals/*
+.metals
+project/*
+target/*
+.idea/*
+*.swp
+*.aux
+*.log
+*.out
