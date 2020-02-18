@@ -11,10 +11,11 @@ abstract class ProofNode {
 case class LeafClause(override val cl: Clause) 
   extends ProofNode
 
-/** A tree clause in a resolution proof of UNSAT is a node corresponding to the result
- *  of performing resolution on some two clauses in the formula.
+/** A resolved clause node in a resolution proof of UNSAT is a node
+ *  corresponding to to result of performing resolution on some two clauses in
+ *  the formula.
  */
-case class TreeClause(override val cl: Clause, v : Int, c1 : ProofNode, c2: ProofNode) 
+case class LearnedClause(override val cl: Clause, v : Int, c1 : ProofNode, c2: ProofNode) 
   extends ProofNode
 
 class DPSolverEx
