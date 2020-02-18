@@ -205,7 +205,7 @@ object WordList {
     "partners", "budget", "rated", "guides", "success", "maximum", "ma",
     "operation", "existing", "quite", "selected", "boy", "amazon",
     "patients", "restaurants", "beautiful", "warning"
-  ).filter(w => w.size >= 4).take(5).toSet
+  ).filter(w => w.size >= 4).take(100).toSet
 
   def info() {
     // # of words is 100
