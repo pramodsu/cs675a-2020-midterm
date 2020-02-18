@@ -339,7 +339,7 @@ class IsTransitiveSpec extends AnyFlatSpec {
     val a = Variable("a")
     val b = Variable("b")
 
-    val f = or(and(a, b), and(Not(a), Not(b)))
+    val f = and(or(a, b), or(Not(a), Not(b)))
     assert(!Relations.isTransitive(f, List(a), List(b)))
   }
 

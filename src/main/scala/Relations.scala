@@ -66,8 +66,13 @@ object Relations {
   /**
    * This function substitutes variables in one expression with other variables.
    *
-   * See the tests in RelationsSpec.scala for examples of how this is supposed
-   * to work.
+   * For example, suppose:
+   *  e = And(List(Variable("a"), Variable("b"))); i.e. (and a b)
+   *  m = List(Variable("a) -> Variable("z")).toMap; i.e. { a -> z }
+   * Then:
+   *  subst(e, m) = And(List(Variable("z"), Variable("b"))); i.e. (and z b)
+   *
+   *  It is not necessary to implement this function, but it may be useful.
    */
   def subst(e : Expr, subs : Map[Variable, Variable]) : Expr = {
     // TODO
@@ -81,6 +86,7 @@ object Relations {
     // TODO
     true
   }
+
   /** Function should return true if the relation whose inputs are the
    *  variables in 'inputs', outputs are the variables in 'output' and whose
    *  indicator function is the expression 'e' is a transitive relation, and
