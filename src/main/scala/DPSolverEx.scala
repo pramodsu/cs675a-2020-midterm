@@ -12,8 +12,7 @@ case class LeafClause(override val cl: Clause)
   extends ProofNode
 
 /** A resolved clause node in a resolution proof of UNSAT is a node
- *  corresponding to to result of performing resolution on some two clauses in
- *  the formula.
+ *  corresponding to the result of performing resolution on some two clauses.
  */
 case class LearnedClause(override val cl: Clause, v : Int, c1 : ProofNode, c2: ProofNode) 
   extends ProofNode
