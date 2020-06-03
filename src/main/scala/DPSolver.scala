@@ -15,12 +15,12 @@ class DPSolver
 {
   /** Adds a clause to the solver. */
   def addClause(cl : Clause) : Unit = {
-    // TODO
+    throw new NotImplementedError("Implement DPSolver.addClause")
   }
 
   /** Solves the current set of clauses.
    *  Returns true if SAT and false if UNSAT. */
   def solve() : Boolean = {
-    true
+    throw new NotImplementedError("Implement DPSolverEx.solve")
   }
 }

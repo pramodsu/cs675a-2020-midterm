@@ -5,7 +5,7 @@ import scala.collection.mutable.{Map => MutableMap, HashMap}
 object Relations {
   /** This class represents a CNF formula corresponding to some expression.
    *
-   *  The list clauses contains the clauses in the formula.  The map is map
+   *  The list clauses contains the clauses in the formula.  The map is a map
    *  from nodes in the expression to the formula.
    *
    *  NOTE: You do not need to use this structure if you don't like it.
